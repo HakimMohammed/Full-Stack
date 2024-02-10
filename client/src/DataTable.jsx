@@ -2,6 +2,7 @@ import DataTable from "react-data-table-component";
 import { useState } from "react";
 import { useMemo } from "react";
 import FilterComponent from "./FilterComponent";
+import { useSelector } from "react-redux";
 
 const customStyles = {
   headRow: {
@@ -35,8 +36,8 @@ export default function DataTableView({ data, columns }) {
   const [filterText, setFilterText] = useState("");
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
 
-  const filteredItems = data.filter(
-    (item) => item.title.toLowerCase().includes(filterText.toLowerCase())
+  const filteredItems = data.filter(item =>
+    item.title.toLowerCase().includes(filterText.toLowerCase())
   );
 
   const subHeaderComponentMemo = useMemo(() => {
