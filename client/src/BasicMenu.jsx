@@ -5,15 +5,16 @@ import Modal from "./Modal";
 import { useState } from "react";
 import axios from "axios";
 
-export default function BasicMenu({ id }) {
+export default function BasicMenu({ id , onDelete}) {
   const [post, setPost] = useState({});
 
   const [comments, setComments] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleDelete = () => {};
-
+  const handleDelete = () => {
+    onDelete(id);
+  };
   const handleDetails = () => {
     const fetchData = async () => {
       try {
@@ -45,7 +46,6 @@ export default function BasicMenu({ id }) {
       }
     };
     fetchData();
-    console.log(post);
   }, []);
 
   return (

@@ -16,7 +16,6 @@ export default function ListPost() {
         );
         setPosts(response.data);
         setIdLoading(false);
-        console.log(posts);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -72,7 +71,7 @@ export default function ListPost() {
       },
     },
     {
-      cell: (row) => <BasicMenu id={row.id} />,
+      cell: (row) => <BasicMenu id={row.id} onDelete={deletePost}/>,
       width: "80px",
       style: {
         borderBottom: "1px solid #FFFFFF",
@@ -81,10 +80,15 @@ export default function ListPost() {
     },
   ];
 
+  const deletePost = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+    console.log(posts);
+  }
+
   return (
     <>
       {isLoading && <div>Loadign ...</div>}
-      {posts && <DataTable data={posts} columns={columns} />}
+      {posts && <DataTable data={posts} columns={columns}/>}
     </>
   );
 }
